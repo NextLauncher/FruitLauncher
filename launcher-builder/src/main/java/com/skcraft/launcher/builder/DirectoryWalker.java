@@ -11,6 +11,8 @@ import lombok.NonNull;
 import java.io.File;
 import java.io.IOException;
 
+import javax.annotation.Nonnull;
+
 /**
  * Abstract class to recursively walk a directory, keep track of a relative
  * path (which may be modified by dropping certain directory entries),
@@ -82,7 +84,7 @@ public abstract class DirectoryWalker {
      * @param name the directory name
      * @return the behavor
      */
-    protected DirectoryBehavior getBehavior(String name) {
+    protected DirectoryBehavior getBehavior(@Nonnull String name) {
         return DirectoryBehavior.CONTINUE;
     }
 

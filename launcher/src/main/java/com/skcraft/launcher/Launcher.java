@@ -43,7 +43,6 @@ import com.skcraft.launcher.update.UpdateManager;
 import com.skcraft.launcher.util.HttpRequest;
 import com.skcraft.launcher.util.SharedLocale;
 import com.skcraft.launcher.util.SimpleLogFormatter;
-import com.sun.management.OperatingSystemMXBean;
 
 import lombok.Delegate;
 import lombok.Getter;
@@ -187,8 +186,10 @@ public final class Launcher {
         double available = Double.MAX_VALUE;
 
         try {
-            OperatingSystemMXBean bean = (OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
-            available = bean.getTotalPhysicalMemorySize() / 1024.0 / 1024.0 / 1024.0;
+            Object bean = ManagementFactory.getOperatingSystemMXBean();
+        	Class<?> clazz = Class.forName("com.sun.management.OperatingSystemMXBean");
+        	int totalmemory = (int) clazz.getMethod("getTotalPhysicalMemorySize").invoke(bean);
+            available = totalmemory / 1024.0 / 1024.0 / 1024.0;
             if (available <= 6) {
                 suggestedMax = available * 0.48;
             } else {
