@@ -182,18 +182,18 @@ public final class Launcher {
      */
     public void setDefaultConfig() {
         double configMax = config.getMaxMemory() / 1024.0;
-        double suggestedMax = 2;
+        double suggestedMax = 8;
         double available = Double.MAX_VALUE;
 
         try {
             Object bean = ManagementFactory.getOperatingSystemMXBean();
         	Class<?> clazz = Class.forName("com.sun.management.OperatingSystemMXBean");
-        	int totalmemory = (int) clazz.getMethod("getTotalPhysicalMemorySize").invoke(bean);
+        	long totalmemory = (long) clazz.getMethod("getTotalPhysicalMemorySize").invoke(bean);
             available = totalmemory / 1024.0 / 1024.0 / 1024.0;
-            if (available <= 6) {
-                suggestedMax = available * 0.48;
+            if (available <= 12) {
+                suggestedMax = available * 0.65;
             } else {
-                suggestedMax = 4;
+                suggestedMax = 8;
             }
         } catch (Exception ignored) {
         }

@@ -29,9 +29,9 @@ public class Configuration {
     private String offlineModePlayerName;
     private String jvmPath;
     private String jvmArgs;
-    private int minMemory = 1024;
+    private int minMemory = 2048;
     private int maxMemory = 0; // Updated in Launcher
-    private int permGen = 256;
+    private int permGen = 512;
     private boolean showConsole = true;
     private int windowWidth = 854;
     private int widowHeight = 480;
